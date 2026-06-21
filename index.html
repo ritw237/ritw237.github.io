@@ -580,8 +580,8 @@
             <div class="arc-desc">Local-first notes. Edits like Notion, merges like Git. Your vault stays on your device.</div>
           </div>
           <div class="arc-item">
-            <div class="arc-head"><span class="arc-ix">03</span><span class="arc-name">RP-Eval</span></div>
-            <div class="arc-desc">Reward-model data pipeline, eval harness &amp; FastAPI serving for narrative quality.</div>
+            <div class="arc-head"><span class="arc-ix">03</span><span class="arc-name">Throughline</span></div>
+            <div class="arc-desc">Open-source platform for evaluating long-horizon reliability in LLM agents — catching drift, mode collapse &amp; premature resolution.</div>
           </div>
           <div class="arc-item">
             <div class="arc-head"><span class="arc-ix">04</span><span class="arc-name">Job-Search-MCP</span></div>
@@ -637,7 +637,7 @@
         <span class="tick bl"></span><span class="tick br"></span>
         <div class="eyebrow">// SIGNAL</div>
         <div class="sig">
-          <a class="sig-row" href="mailto:ritwik.srv237@gmail.com"><span class="sk">Mail</span><span class="sv">ritwik.srv237@gmail.com</span></a>
+          <a class="sig-row" href="/cdn-cgi/l/email-protection#e6948f92918f8dc8959490d4d5d1a6818b878f8ac885898b"><span class="sk">Mail</span><span class="sv"><span class="__cf_email__" data-cfemail="d5a7bca1a2bcbefba6a7a3e7e6e295b2b8b4bcb9fbb6bab8">[email&#160;protected]</span></span></a>
           <a class="sig-row" href="https://github.com/ritw237" target="_blank" rel="noopener"><span class="sk">Git</span><span class="sv">github.com/ritw237</span></a>
           <a class="sig-row" href="https://linkedin.com/in/ritw237" target="_blank" rel="noopener"><span class="sk">In</span><span class="sv">linkedin.com/in/ritw237</span></a>
           <a class="sig-row" href="https://substack.com/@ritwiksrivastava/posts" target="_blank" rel="noopener"><span class="sk">Writing</span><span class="sv">on Substack →</span></a>
@@ -650,7 +650,7 @@
     <!-- ═══ MOBILE LAYER (hidden on desktop) ═══ -->
     <div class="mroom" aria-hidden="true">
       <video class="mroom-vid" id="mroom" src="refs/room-video.mp4"
-             poster="refs/room-base.png" loop muted playsinline preload="auto"></video>
+             poster="refs/room-base.png" autoplay loop muted playsinline preload="auto"></video>
       <div class="mroom-tint"></div>
     </div>
 
@@ -698,8 +698,8 @@
               <div class="arc-desc">Local-first notes. Edits like Notion, merges like Git. Your vault stays on your device.</div>
             </div>
             <div class="arc-item">
-              <div class="arc-head"><span class="arc-ix">03</span><span class="arc-name">RP-Eval</span></div>
-              <div class="arc-desc">Reward-model data pipeline, eval harness &amp; FastAPI serving for narrative quality.</div>
+              <div class="arc-head"><span class="arc-ix">03</span><span class="arc-name">Throughline</span></div>
+              <div class="arc-desc">Open-source platform for evaluating long-horizon reliability in LLM agents — catching drift, mode collapse &amp; premature resolution.</div>
             </div>
             <div class="arc-item">
               <div class="arc-head"><span class="arc-ix">04</span><span class="arc-name">Job-Search-MCP</span></div>
@@ -757,7 +757,7 @@
           <span class="tick bl"></span><span class="tick br"></span>
           <div class="eyebrow">// SIGNAL</div>
           <div class="sig">
-            <a class="sig-row" href="mailto:ritwik.srv237@gmail.com"><span class="sk">Mail</span><span class="sv">ritwik.srv237@gmail.com</span></a>
+            <a class="sig-row" href="/cdn-cgi/l/email-protection#abd9c2dfdcc2c085d8d9dd99989cebccc6cac2c785c8c4c6"><span class="sk">Mail</span><span class="sv"><span class="__cf_email__" data-cfemail="4032293437292b6e33323672737700272d21292c6e232f2d">[email&#160;protected]</span></span></a>
             <a class="sig-row" href="https://github.com/ritw237" target="_blank" rel="noopener"><span class="sk">Git</span><span class="sv">github.com/ritw237</span></a>
             <a class="sig-row" href="https://linkedin.com/in/ritw237" target="_blank" rel="noopener"><span class="sk">In</span><span class="sv">linkedin.com/in/ritw237</span></a>
             <a class="sig-row" href="https://substack.com/@ritwiksrivastava/posts" target="_blank" rel="noopener"><span class="sk">Writing</span><span class="sv">on Substack →</span></a>
@@ -799,7 +799,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Scale the fixed 3:2 stage to fit the viewport (contain — whole room visible).
     var stage = document.getElementById('stage');
     var SW = 1764, SH = 1176;
@@ -829,6 +829,24 @@
         try { document.querySelector('.bg-fill').pause(); } catch (e) {}
         try { document.getElementById('room').pause(); } catch (e) {}
         mroom.play().catch(function () {});
+        // Some mobile browsers block programmatic autoplay until the first
+        // user gesture — retry play on the first touch/scroll so the fire
+        // reliably animates instead of freezing on the poster frame.
+        var kick = function () {
+          mroom.play().catch(function () {});
+          if (!mroom.paused) {
+            ['touchstart', 'pointerdown', 'scroll'].forEach(function (ev) {
+              window.removeEventListener(ev, kick, true);
+            });
+          }
+        };
+        ['touchstart', 'pointerdown', 'scroll'].forEach(function (ev) {
+          window.addEventListener(ev, kick, true);
+        });
+        // also retry when the tab/section becomes visible again
+        document.addEventListener('visibilitychange', function () {
+          if (!document.hidden) mroom.play().catch(function () {});
+        });
       } else {
         mroom.pause();
         return;   // desktop: nothing else to wire
